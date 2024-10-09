@@ -1,0 +1,22 @@
+services:
+    #Postgres database
+    postgres:
+        image: 'postgres:latest'
+        environment:
+            - POSTGRES_USERNAME=postgres
+            - POSTGRES_PASSWORD=postgres_password
+            - POSTGRES_DB=simple_blog_api
+    #Express API server
+    api:
+        build:
+            context: ./ #Relative path to Dockerfile
+            dockerfile: Dockerfile #Name of the Dockerfile
+        image: docker.io/supraja017/simple_blog_api
+        environment:
+            - POSTGRES_HOST=postgres
+            - POSTGRES_PORT=5432
+            - POSTGRES_USERNAME=postgres
+            - POSTGRES_PASSWORD=postgres_password
+            - POSTGRES_DB=simple_blog_api
+        ports:
+            - '3000:3000'
